@@ -32,7 +32,53 @@ public class radixSort {
                     arr[index++]=bucket[j][i];
                 }
             }
+           bucketElementsNums[j]=0;
         }
-        System.out.println("第一轮数据结果为:"+ Arrays.toString(arr));
+        //第二次
+
+        for (int i=0;i<arr.length;i++) {
+            //十位
+            int digital = arr[i]/10 % 10;
+            //将其放入对应的桶中
+            bucket[digital][bucketElementsNums[digital]] = arr[i];
+            //准备放入下一个数据
+            bucketElementsNums[digital]++;
+        }
+        //下面将进行第二次取出
+        index=0;
+        for(int j=0;j< bucketElementsNums.length;j++){
+            //先判断桶中是否为空
+            if(bucketElementsNums[j]!=0){
+                //不是空,则进行取出
+                for(int i=0;i< bucketElementsNums[j];i++){
+                    arr[index++]=bucket[j][i];
+                }
+            }
+            bucketElementsNums[j]=0;
+        }
+
+        //第三次
+
+        for (int i=0;i<arr.length;i++) {
+            //百位
+            int digital = arr[i]/100;
+            //将其放入对应的桶中
+            bucket[digital][bucketElementsNums[digital]] = arr[i];
+            //准备放入下一个数据
+            bucketElementsNums[digital]++;
+        }
+        //下面将进行第三次取出
+        index=0;
+        for(int j=0;j< bucketElementsNums.length;j++){
+            //先判断桶中是否为空
+            if(bucketElementsNums[j]!=0){
+                //不是空,则进行取出
+                for(int i=0;i< bucketElementsNums[j];i++){
+                    arr[index++]=bucket[j][i];
+                }
+            }
+            bucketElementsNums[j]=0;
+        }
+        System.out.println(Arrays.toString(arr));
     }
 }
